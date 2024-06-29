@@ -1,6 +1,9 @@
 import os
 import sqlite3
 import logging
+from langchain_community.utilities import SQLDatabase
+from config import Config
+
 
 class DatabaseManager:
     def __init__(self, db_folder, db_name):
@@ -8,6 +11,13 @@ class DatabaseManager:
         self.db_name = db_name
         self.db_path = os.path.join(db_folder, db_name)
         self.logger = logging.getLogger(__name__)
+        self.db = SQLDatabase.from_uri(f"sqlite:///{Config.DB_PATH}", sample_rows_in_table_info=3)
+
+    def get_usable_table_names(self):
+        return self.db.get_usable_table_names()
+
+    def get_db(self):
+        return self.db
 
     def create_table(self):
         try:

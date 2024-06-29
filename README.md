@@ -103,7 +103,7 @@ The project consists of the following components:
    # Run Batch Job service
    python ~/PycharmProjects/Lets_Build_Simple_Real_Estate_Buzz_w_AI_Agents/Batch_Job.py
    # Run UI
-   streamlit run Main.py  
+   streamlit run main.py  
    ```
 5. Launch UI at :  http://localhost:8501/
 
