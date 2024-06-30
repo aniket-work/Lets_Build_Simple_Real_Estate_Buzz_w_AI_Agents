@@ -3,7 +3,7 @@ import sqlite3
 import logging
 from langchain_community.utilities import SQLDatabase
 from config import Config
-
+import pandas as pd
 
 class DatabaseManager:
     def __init__(self, db_folder, db_name):
@@ -18,6 +18,12 @@ class DatabaseManager:
 
     def get_db(self):
         return self.db
+
+    def get_data(self, query):
+        conn = sqlite3.connect(self.db_path)
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        return df
 
     def create_table(self):
         try:
